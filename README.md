@@ -1,5 +1,8 @@
 # Pludoni::Pdfutils
 
+[![Gem Version](https://badge.fury.io/rb/pludoni_pdfutils.svg)](https://badge.fury.io/rb/pludoni_pdfutils)
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
