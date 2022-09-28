@@ -1,11 +1,7 @@
 
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "pludoni/pdfutils/version"
-
 Gem::Specification.new do |spec|
   spec.name          = "pludoni_pdfutils"
-  spec.version       = Pludoni::Pdfutils::VERSION
+  spec.version       = "0.1.1"
   spec.authors       = ["Stefan Wienert"]
   spec.email         = ["info@stefanwienert.de"]
 
