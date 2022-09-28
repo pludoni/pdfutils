@@ -1,4 +1,3 @@
-require "pludoni/pdfutils/version"
 require 'mimemagic'
 
 module Pludoni
