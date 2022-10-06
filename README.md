@@ -21,6 +21,8 @@ Or install it yourself as:
 
 requires ghostscript installed.
 
+Conversion of document formats (docx etc.) requires soffice installed
+
 ## Usage
 
 All method take either ActiveStorage::Blob or File/Tempfile as argument and return a Tempfile/File
@@ -41,7 +43,10 @@ Pludoni::Pdfutils.convert_all_to_pdf_and_join_max_size(blobs, max_files: 3, max_
 Individual classes:
 
 ```ruby
-tempfile = Pludoni::Pdfutils::ConvertToPdf.new(image_file).run
+# jpg
+tempfile = Pludoni::Pdfutils::ConvertImageToPdf.new(image_file).run
+# docx etc.
+tempfile = Pludoni::Pdfutils::ConvertDocumentToPdf.new(image_file).run
 
 
 tempfile = Pludoni::Pdfutils::Joiner.new(job_application.uploads.map(&:blob)).run

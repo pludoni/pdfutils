@@ -46,10 +46,17 @@ module Pludoni
 
     def convert_to_pdf(blob, &block)
       blob = FileWrapper.make(blob)
-      # TODO: convert odt docx
-      if blob.content_type.to_s['image']
+      case blob.content_type.to_s
+      when /image/
         block.call("converting #{blob.filename.to_s} to pdf") if block_given?
-        ConvertToPdf.new(blob).run(&block)
+        ConvertImageToPdf.new(blob).run(&block)
+      when "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/msword",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        block.call("converting #{blob.filename.to_s} to pdf") if block_given?
+        ConvertDocumentToPdf.new(blob).run(&block)
       else
         blob
       end

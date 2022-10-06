@@ -1,7 +1,7 @@
 require 'open3'
 
 module Pludoni::Pdfutils
-  class ConvertToPdf
+  class ConvertImageToPdf
     def initialize(blob)
       @blob = FileWrapper.make(blob)
     end
