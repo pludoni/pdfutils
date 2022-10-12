@@ -6,7 +6,7 @@ module Pludoni
       end
 
       def to_tf
-        file = Tempfile.new(["ActiveStorage-#{@file.id}-", @file.filename.extension_with_delimiter])
+        file = Tempfile.new([@file.filename.base, @file.filename.extension_with_delimiter])
         ActiveStorage::Downloader.new(@file.service).send(:download, @file.key, file)
         file
       end

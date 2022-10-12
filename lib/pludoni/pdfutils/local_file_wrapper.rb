@@ -1,12 +1,14 @@
 module Pludoni
   module Pdfutils
     class LocalFileWrapper < FileWrapper
+      attr_writer :filename
+
       def filesize
         @file.size
       end
 
       def filename
-        @file.path.split("/").last
+        @filename || @file.path.split("/").last
       end
 
       def to_tf

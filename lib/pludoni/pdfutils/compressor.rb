@@ -7,7 +7,8 @@ module Pludoni::Pdfutils
     end
 
     def run
-      tf = Tempfile.new(['joiner', '.pdf'])
+      fname = File.basename(@blob.filename.to_s, '.*')
+      tf = Tempfile.new([fname, '.pdf'])
       tf.binmode
       input = @blob.to_tf
       cli = "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=#{Shellwords.escape tf.path} #{Shellwords.escape input.path}"
@@ -17,7 +18,7 @@ module Pludoni::Pdfutils
         raise CompressionFailed, "PDF Compression failed: \nStdout: #{stdout}\nStderr: #{stderr}"
       end
 
-      FileWrapper.make(tf)
+      FileWrapper.make(tf, filename: fname + ".pdf")
     end
   end
 end

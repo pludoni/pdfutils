@@ -7,17 +7,18 @@ module Pludoni::Pdfutils
     end
 
     def run
-      tf = Tempfile.new(['joiner', '.pdf'])
+      fname = @blobs.map(&:filename).map { |i| i.split('.').first[0..20] }.join('-')
+
+      tf = Tempfile.new([fname, '.pdf'])
       tf.binmode
       tfs = @blobs.map { |i| i.to_tf }
       cli = "gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=#{tf.path} #{tfs.map(&:path).join(' ')}"
-
-        stdout, stderr, status = Open3.capture3(cli)
+      stdout, stderr, status = Open3.capture3(cli)
       unless status.success?
         raise JoiningFailedError, "PDF Joining failed: \nStdout: #{stdout}\nStderr: #{stderr}"
       end
 
-      FileWrapper.make(tf)
+      FileWrapper.make(tf, filename: "#{fname}.pdf")
     end
   end
 end

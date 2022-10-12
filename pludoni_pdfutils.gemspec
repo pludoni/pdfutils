@@ -1,7 +1,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "pludoni_pdfutils"
-  spec.version       = "0.2.0"
+  spec.version       = "0.3.0"
   spec.authors       = ["Stefan Wienert"]
   spec.email         = ["info@stefanwienert.de"]
 

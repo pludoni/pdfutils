@@ -5,12 +5,16 @@ module Pludoni
         @file = file
       end
 
-      def self.make(blob_or_file)
+      def self.make(blob_or_file, filename: nil)
         case blob_or_file
         when ActiveStorage::Blob
           ActiveStorageWrapper.new(blob_or_file)
         when File, Tempfile
-          LocalFileWrapper.new(blob_or_file)
+          fw = LocalFileWrapper.new(blob_or_file)
+          if filename
+            fw.filename = filename
+          end
+          fw
         when FileWrapper
           blob_or_file
         else
@@ -32,5 +36,3 @@ module Pludoni
     end
   end
 end
-
-

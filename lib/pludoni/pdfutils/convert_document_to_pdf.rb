@@ -7,9 +7,10 @@ module Pludoni::Pdfutils
     end
 
     def run(&block)
+      fname = File.basename(@blob.filename.to_s, File.extname(@blob.filename.to_s))
       @blob.open do |source|
         # convert image to pdf
-        tf = Tempfile.new(['convert', '.pdf'])
+        tf = Tempfile.new([fname, '.pdf'])
         tf.binmode
 
         command = ['soffice']
@@ -32,7 +33,7 @@ module Pludoni::Pdfutils
 
         tf.open
 
-        FileWrapper.make(tf)
+        FileWrapper.make(tf, filename: "#{fname}.pdf")
       end
     end
   end

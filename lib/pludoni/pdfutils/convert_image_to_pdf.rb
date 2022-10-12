@@ -7,9 +7,10 @@ module Pludoni::Pdfutils
     end
 
     def run(&block)
+      fname = File.basename(@blob.filename.to_s, '.*')
       @blob.open do |source|
         # convert image to pdf
-        tf = Tempfile.new(['convert', '.pdf'])
+        tf = Tempfile.new([fname, '.pdf'])
         tf.binmode
         cli = "gs -dNOSAFER -dPDFSETTINGS=/prepress -sDEVICE=pdfwrite -o #{tf.path} viewjpeg.ps -c \\(#{source.path}\\) viewJPEG"
 
@@ -18,7 +19,7 @@ module Pludoni::Pdfutils
           raise ConversionFailedError, "PDF convertion failed: Command: #{cli}\nStdout: #{stdout}\nStderr: #{stderr}"
         end
 
-        FileWrapper.make(tf)
+        FileWrapper.make(tf, filename: "#{fname}.pdf")
       end
     end
   end
