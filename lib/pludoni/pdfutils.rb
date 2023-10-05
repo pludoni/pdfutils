@@ -1,5 +1,3 @@
-require 'mimemagic'
-
 module Pludoni
   module Pdfutils
     class Error < StandardError; end

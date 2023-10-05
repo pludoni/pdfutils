@@ -1,7 +1,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "pludoni_pdfutils"
-  spec.version       = "0.3.0"
+  spec.version       = "0.4.0"
   spec.authors       = ["Stefan Wienert"]
   spec.email         = ["info@stefanwienert.de"]
 
@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "activestorage", ">= 5.2.0"
   spec.add_dependency "zeitwerk"
-  spec.add_dependency "mimemagic"
+  spec.add_dependency "marcel"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"

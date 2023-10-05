@@ -1,3 +1,4 @@
+require 'marcel'
 module Pludoni
   module Pdfutils
     class LocalFileWrapper < FileWrapper
@@ -21,7 +22,7 @@ module Pludoni
       end
 
       def content_type
-        MimeMagic.by_magic(@file.read).type
+        Marcel::MimeType.for(@file)
       ensure
         @file.rewind
       end
