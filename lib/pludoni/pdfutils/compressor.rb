@@ -11,7 +11,7 @@ module Pludoni::Pdfutils
       tf = Tempfile.new([fname, '.pdf'])
       tf.binmode
       input = @blob.to_tf
-      cli = "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=#{Shellwords.escape tf.path} #{Shellwords.escape input.path}"
+      cli = "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -r150 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=#{Shellwords.escape tf.path} #{Shellwords.escape input.path}"
 
       stdout, stderr, status = Open3.capture3(cli)
       unless status.success?
