@@ -22,11 +22,11 @@ module Pludoni::Pdfutils
         command << source.path
         stdout, stderr, status = Open3.capture3(*command)
         unless status.success?
-          raise ConversionFailedError, "PDF conversion failed: Command: #{cli}\nStdout: #{stdout}\nStderr: #{stderr}"
+          raise ConversionFailedError, "PDF conversion failed: Command: #{command}\nStdout: #{stdout}\nStderr: #{stderr}"
         end
         pdf_path = source.path.sub(/\.[a-z0-9]+$/i, '.pdf')
         unless File.exist?(pdf_path)
-          raise ConversionFailedError, "PDF conversion failed: Command: #{cli}\nStdout: #{stdout}\nStderr: #{stderr}"
+          raise ConversionFailedError, "PDF conversion failed: Command: #{command}\nStdout: #{stdout}\nStderr: #{stderr}"
         end
 
         FileUtils.move(pdf_path, tf.path)
